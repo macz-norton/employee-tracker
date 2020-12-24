@@ -1,4 +1,5 @@
 const inquirer = require("inquirer");
+const { createBrotliDecompress } = require("zlib");
 
 const db = required("./db");
 
@@ -12,6 +13,7 @@ function askForAction() {
             "VIEW_DEPARTMENTS",
             "VIEW ROLES",
             "VIEW_EMPLOYEES",
+            "CREATE_ROLE",
             "QUIT"
         ]
     }).then((res) => {
@@ -26,6 +28,10 @@ function askForAction() {
                 return;
 
             case "VIEW_EMPLOYEES":
+                return;
+
+            case "CREATE_ROLE":
+                createRole();
                 return;
             
             default:
@@ -44,6 +50,34 @@ function viewDepartments() {
             console.table(results);
             askForAction();
         })
+
+}
+
+function createRole() {
+
+    db
+        .getDepartments()
+        .then((departments) => {
+
+            console.log(departments);
+
+            const departmentChoices = departments.map((department) => ({
+                value: department.id,
+                label: department.name
+            }))
+
+        inquirer.prompt([
+            {
+                message:"What department is this role for?",
+                type: "list",
+                name: "department_id",
+                choices: departmentChoices
+            }
+        ]).then(rest => {
+            console.log(res);
+        });
+
+    })
 
 }
 
