@@ -14,11 +14,12 @@ function askForAction() {
             "VIEW_EMPLOYEES",
             "QUIT"
         ]
-    }).then(() => {
+    }).then((res) => {
 
         switch(res.action) {
 
             case "VIEW_DEPARTMENTS":
+                viewDepartments();
                 return;
 
             case "VIEW_ROLES":
@@ -35,3 +36,15 @@ function askForAction() {
 
 }
 
+function viewDepartments() {
+
+    db
+        .getDepartments()
+        .then((results) => {
+            console.table(results);
+            askForAction();
+        })
+
+}
+
+askForAction();
