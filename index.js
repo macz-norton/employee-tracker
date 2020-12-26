@@ -1,13 +1,12 @@
 const db = require("/.db");
+const connection = require("./db/connection")
+
 const inquirer = require("inquirer");
-
-const { createBrotliDecompress } = require("zlib");
-
-const db = required("./db");
 
 function askForAction() {
 
-    inquirer.prompt({
+    inquirer
+    .prompt({
         message: "What would you like to do?",
         name: "action",
         type: "list",
@@ -28,27 +27,55 @@ function askForAction() {
             "Remove role",
             "Quit"
         ]
-    }).then((res) => {
+    })
+    .then(() => {
 
         switch(res.action) {
 
-            case "VIEW_DEPARTMENTS":
-                viewDepartments();
+            case "View all employees":
                 return;
 
-            case "VIEW_ROLES":
+            case "View all employees by department":
                 return;
 
-            case "VIEW_EMPLOYEES":
+            case "View all employees by manager":
                 return;
 
-            case "CREATE_ROLE":
-                createRole();
+            case "Add employee":
+                return;
+
+            case "Remove employee":
+                return;
+
+            case "Update employee role":
+                return;
+
+            case "Update employee manager":
                 return;
             
+            case "View all departments":
+                return;
+
+            case "View total used budget of a department":
+                return;
+
+            case "Add department":
+                return;
+
+            case "Remove department":
+                return;
+
+            case "View all roles":
+                return;
+
+            case "Add role":
+                return;
+
+            case "Remove role":
+                return;
+
             default:
                 connection.end();
-
         }
     })
 
