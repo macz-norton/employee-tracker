@@ -1,4 +1,4 @@
-const db = require("/.db");
+const db = require("./db");
 const connection = require("./db/connection")
 
 const inquirer = require("inquirer");
@@ -104,21 +104,22 @@ function createRole() {
 
             const departmentChoices = departments.map((department) => ({
                 value: department.id,
-                label: department.name
+                name: department.name
             }))
 
-        inquirer.prompt([
-            {
-                message:"What department is this role for?",
-                type: "list",
-                name: "department_id",
-                choices: departmentChoices
-            }
-        ]).then(rest => {
-            console.log(res);
-        });
+            inquirer
+                .prompt([
+                    {
+                        message:"What department is this role for?",
+                        type: "list",
+                        name: "department_id",
+                        choices: departmentChoices
+                    }
+                ]).then(res => {
+                    console.log(res);
+                });
 
-    })
+        })
 
 }
 

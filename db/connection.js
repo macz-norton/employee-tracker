@@ -17,17 +17,4 @@ connection.connect((err) => {
 
 connection.query = util.promisify(connection.query);
 
-connection.query("", function(err, res) {
-
-
-})
-
-connection.query("")
-.then((res) => {
-
-})
-.catch(() => {
-    
-})
-
 module.exports = connection;
