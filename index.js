@@ -28,7 +28,7 @@ function askForAction() {
             "Quit"
         ]
     })
-    .then(() => {
+    .then((res) => {
 
         switch(res.action) {
 
@@ -54,6 +54,7 @@ function askForAction() {
                 return;
             
             case "View all departments":
+                viewDepartments();
                 return;
 
             case "View total used budget of a department":
@@ -69,6 +70,7 @@ function askForAction() {
                 return;
 
             case "Add role":
+                createRole();
                 return;
 
             case "Remove role":

@@ -7,7 +7,7 @@ const connection = mysql.createConnection({
     port: 3306,
     user: "root",
     password: "2g7pXzH&oA5S",
-    database:  "employees"
+    database:  "employeeDB"
 });
 
 connection.connect((err) => {
