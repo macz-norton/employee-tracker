@@ -1,4 +1,6 @@
+const db = require("/.db");
 const inquirer = require("inquirer");
+
 const { createBrotliDecompress } = require("zlib");
 
 const db = required("./db");
@@ -6,15 +8,25 @@ const db = required("./db");
 function askForAction() {
 
     inquirer.prompt({
-        message: "Choose something to do",
+        message: "What would you like to do?",
         name: "action",
         type: "list",
         choices: [
-            "VIEW_DEPARTMENTS",
-            "VIEW ROLES",
-            "VIEW_EMPLOYEES",
-            "CREATE_ROLE",
-            "QUIT"
+            "View all employees",
+            "View all employees by department",
+            "View all employees by manager",
+            "Add employee",
+            "Remove employee",
+            "Update employee role",
+            "Update employee manager",
+            "View all departments",
+            "View total used budget of a department",
+            "Add department",
+            "Remove department",
+            "View all roles",
+            "Add role",
+            "Remove role",
+            "Quit"
         ]
     }).then((res) => {
 
