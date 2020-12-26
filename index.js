@@ -2,6 +2,7 @@ const db = require("./db");
 const connection = require("./db/connection")
 
 const inquirer = require("inquirer");
+const { insertRole } = require("./db");
 
 function askForAction() {
 
@@ -72,7 +73,7 @@ function askForAction() {
                 return;
 
             case "Add role":
-                // createRole();
+                createRole();
                 return;
 
             case "Remove role":
@@ -118,33 +119,51 @@ function viewDepartments() {
 
 }
 
-// function createRole() {
+function createRole() {
 
-//     db
-//         .getDepartments()
-//         .then((departments) => {
+    db
+        .getDepartments()
+        .then((departments) => {
 
-//             console.log(departments);
+            const departmentChoices = departments.map((department) => ({
+                value: department.id,
+                name: department.name
+            }))
 
-//             const departmentChoices = departments.map((department) => ({
-//                 value: department.id,
-//                 name: department.name
-//             }))
+            inquirer
+                .prompt([
+                    {
+                        message: "What is the role's title?",
+                        type: "input",
+                        name: "role_title"
+                    },
+                    {
+                        message: "What is the role's salary?",
+                        type: "input",
+                        name: "role_salary",
+                        validate: (salary => {
+                            if (isNaN(salary) === false) {
+                                return true;
+                            }
+                            return false;
+                        })
+                    },
+                    {
+                        message: "What department is this role for?",
+                        type: "list",
+                        name: "department_id",
+                        choices: departmentChoices
+                    }
+                ]).then(answer => {
 
-//             inquirer
-//                 .prompt([
-//                     {
-//                         message:"What department is this role for?",
-//                         type: "list",
-//                         name: "department_id",
-//                         choices: departmentChoices
-//                     }
-//                 ]).then(res => {
-//                     console.log(res);
-//                 });
+                    console.log(answer);
+                    insertRole();
+                    askForAction();
 
-//         })
+                });
 
-// }
+        })
+
+}
 
 askForAction();

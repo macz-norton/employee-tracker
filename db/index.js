@@ -12,19 +12,18 @@ module.exports = {
     
     getEmployees() {
         return connection.query("SELECT * FROM employees");
+    },
+    insertRole() {
+        return connection.query(
+            "INSERT INTO roles SET ?",
+            {
+                title: answer.role_title,
+                salary: answer.role_salary,
+                department: answer.department_id
+            }
+        );
     }
-    // insertRole() {
-    //     return connection.query("INSERT INTO role VALUES ?,
-    //     [title, salary, department],
-    //     )
-    // }
 }
-
-// START
-// What would you like to do?
-    // View all employees
-    // SELECT * FROM employees
-
     // View all employees by department
     // SELECT * FROM employees GROUP BY departm
 
