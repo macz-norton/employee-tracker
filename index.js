@@ -119,6 +119,8 @@ function viewDepartments() {
 
 }
 
+// function createDepartment
+
 function createRole() {
 
     db
@@ -135,12 +137,12 @@ function createRole() {
                     {
                         message: "What is the role's title?",
                         type: "input",
-                        name: "role_title"
+                        name: "title"
                     },
                     {
                         message: "What is the role's salary?",
                         type: "input",
-                        name: "role_salary",
+                        name: "salary",
                         validate: (salary => {
                             if (isNaN(salary) === false) {
                                 return true;
@@ -152,12 +154,16 @@ function createRole() {
                         message: "What department is this role for?",
                         type: "list",
                         name: "department_id",
-                        choices: departmentChoices
+                        choices: departmentChoices  
                     }
-                ]).then(answer => {
-
-                    console.log(answer);
-                    insertRole();
+                ]).then((results) => {
+                    const newRole = {
+                        title: results.title,
+                        salary: results.salary,
+                        department_ID: results.department_ID
+                    }
+                    console.log(newRole);
+                    insertRole(newRole);
                     askForAction();
 
                 });

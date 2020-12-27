@@ -13,15 +13,9 @@ module.exports = {
     getEmployees() {
         return connection.query("SELECT * FROM employees");
     },
-    insertRole() {
+    insertRole(results) {
         return connection.query(
-            "INSERT INTO roles SET ?",
-            {
-                title: answer.role_title,
-                salary: answer.role_salary,
-                department: answer.department_id
-            }
-        );
+            "INSERT INTO roles SET ?", results);
     }
 }
     // View all employees by department
