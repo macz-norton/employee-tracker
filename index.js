@@ -63,6 +63,7 @@ function askForAction() {
                 return;
 
             case "Add department":
+                createDepartment();
                 return;
 
             case "Remove department":
@@ -119,7 +120,23 @@ function viewDepartments() {
 
 }
 
-// function createDepartment
+function createDepartment() {
+    inquirer
+    .prompt(
+        {
+            message: "What is the department name?",
+            type: "input",
+            name: "name"
+        },
+    ).then((results) => {
+        console.log(results);
+
+        db.insertDepartment(results);
+
+        askForAction();
+    });
+    
+}
 
 function createRole() {
 

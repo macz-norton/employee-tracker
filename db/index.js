@@ -13,9 +13,15 @@ module.exports = {
     getEmployees() {
         return connection.query("SELECT * FROM employees");
     },
+    insertDepartment(results) {
+        return connection.query(
+            "INSERT INTO departments SET ?", results
+        );
+    },
     insertRole(results) {
         return connection.query(
-            "INSERT INTO roles SET ?", results);
+            "INSERT INTO roles SET ?", results
+        );
     }
 }
     // View all employees by department
