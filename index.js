@@ -38,6 +38,7 @@ function askForAction() {
                 return;
 
             case "View all employees by department":
+                viewEmployeesByDept();
                 return;
 
             case "View all employees by manager":
@@ -98,6 +99,15 @@ function viewEmployees() {
 
 }
 
+function viewEmployeesByDept() {
+    db
+        .getEmployeesByDepartment()
+        .then((results) => {
+            console.table(results);
+            askForAction();
+        })
+}
+
 function viewRoles() {
 
     db
@@ -143,7 +153,7 @@ function createRole() {
     db
         .getDepartments()
         .then((departments) => {
-
+            // TODO Fix department_id mapping
             const departmentChoices = departments.map((department) => ({
                 value: department.id,
                 name: department.name

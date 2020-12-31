@@ -2,16 +2,19 @@ const connection = require("./connection");
 
 module.exports = {
 
+    getEmployees() {
+        return connection.query("SELECT * FROM employees");
+    },
+    getEmployeesByDepartment() {
+        return connection.query(
+            "SELECT * FROM employees INNER JOINGROUP BY department_id");
+    },
     getDepartments() {
         return connection.query("SELECT * FROM departments");
     },
 
     getRoles() {
         return connection.query("SELECT * FROM roles");
-    },
-    
-    getEmployees() {
-        return connection.query("SELECT * FROM employees");
     },
     insertDepartment(results) {
         return connection.query(
@@ -24,33 +27,3 @@ module.exports = {
         );
     }
 }
-    // View all employees by department
-    // SELECT * FROM employees GROUP BY departm
-
-    // View all employees by manager
-    // Add employee
-        // What is the employee's first name?
-        // What is the employee's last name?
-        // What is the employee's role?
-        // Who is the employee's manager?
-    // Remove employee
-        // Which employee do you want to remove?
-    // Update employee role
-        // Which employee do you want to update?
-    // Update employee manager
-        // Which employee's manager do you want to update?
-    // View all departments
-    // View total used budget of a department
-        // Which department do you want to view?
-    // Add department
-        // What is the department's name?
-    // Remove department
-        // Which department do you want to remove?
-    // View all roles
-    // Add role
-        // What is the role's title?
-        // What is the role's salary?
-        // In what department is the role?
-    // Remove role
-        // Which role do you want to remove?
-    // Quit
