@@ -2,28 +2,50 @@ const connection = require("./connection");
 
 module.exports = {
 
-    getEmployees() {
-        return connection.query("SELECT * FROM employee");
-    },
-    getEmployeesByDepartment() {
-        return connection.query(
-            "SELECT * FROM employee INNER JOIN GROUP BY department_id");
-    },
-    getDepartments() {
-        return connection.query("SELECT * FROM department");
-    },
-
-    getRoles() {
-        return connection.query("SELECT * FROM role");
-    },
+    // Add departments
     insertDepartment(results) {
         return connection.query(
             "INSERT INTO department SET ?", results
         );
     },
+    // Add roles
     insertRole(results) {
         return connection.query(
-            "INSERT INTO roles SET ?", results
+            "INSERT INTO role SET ?", results
         );
-    }
+    },
+    // Add employees
+    insertEmployee(results) {
+        return connection.query(
+            "INSERT INTO employee SET ?", results
+        );
+    },
+    // View all departments
+    getDepartments() {
+        return connection.query("SELECT * FROM department");
+    },
+    // View all roles
+    getRoles() {
+        return connection.query("SELECT * FROM role");
+    },
+    // View all employees
+    getEmployees() {
+        return connection.query("SELECT * FROM employee");
+    },
+    // Update employee roles
+
+    // Update employee managers
+    getEmployeesByManager() {
+        return connection.query(
+            "SELECT * FROM employee INNER JOIN GROUP BY manager_id");
+    },
+
+    // Delete departments
+
+    // Delete roles
+
+    // Delete employees
+    
+    // View the total utilized budget of a department
+
 }
