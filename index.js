@@ -187,7 +187,7 @@ function createRole() {
                     const newRole = {
                         title: results.title,
                         salary: results.salary,
-                        department_ID: results.department_ID
+                        department_ID: results.department_id
                     }
                     console.log(newRole);
                     insertRole(newRole);
