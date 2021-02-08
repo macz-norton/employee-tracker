@@ -2,7 +2,7 @@ const db = require("./db");
 const connection = require("./db/connection")
 
 const inquirer = require("inquirer");
-const { insertRole } = require("./db");
+// const { insertRole } = require("./db");
 
 function askForAction() {
 
@@ -166,43 +166,55 @@ function createEmployee() {
                 name: role.title,
             }));
 
+    db
+        .getEmployees()
+        .then((managers) => {
+
+            const managerChoices = managers.map((manager) => ({
+                value: manager.id,
+                name: manager.first_name + " " + manager.last_name
+            }))
+
             inquirer
-                .prompt([
-                    {
-                        message: "What is the employee's first name?",
-                        type: "input",
-                        name: "firstName"
-                    },
-                    {
-                        message: "What is the employee's last name?",
-                        type: "input",
-                        name: "lastName"
-                    },
-                    {
-                        message: "What is the employee's role?",
-                        type: "list",
-                        name: "role_id",
-                        choices: roleChoices 
-                    },
-                    {
-                        message: "Who is the employee's manager?",
-                        type: "list",
-                        name: "manager_id",
-                        choices: managerChoices 
-                    }
-                ]).then((results) => {
-                    const newEmployee = {
-                        title: results.title,
-                        salary: results.salary,
-                        department_ID: results.department_id
-                    }
-                    console.log(newRole);
-                    insertRole(newRole);
-                    askForAction();
-
-                });
-
+            .prompt([
+                {
+                    message: "What is the employee's first name?",
+                    type: "input",
+                    name: "first_name"
+                },
+                {
+                    message: "What is the employee's last name?",
+                    type: "input",
+                    name: "last_name"
+                },
+                {
+                    message: "What is the employee's role?",
+                    type: "list",
+                    name: "role_id",
+                    choices: roleChoices 
+                },
+                {
+                    message: "Who is the employee's manager?",
+                    type: "list",
+                    name: "manager_id",
+                    choices: managerChoices 
+                }
+            ]).then((results) => {
+                const newEmployee = {
+                    first_name: results.first_name,
+                    last_name: results.last_name,
+                    role_id: results.role_id,
+                    manager_id: results.manager_id
+                }
+                console.log(newEmployee);
+                insertEmployee(newEmployee);
+                askForAction();
+    
+            });
+            
         })
+        
+})
 }
 
 // View all departments
