@@ -41,6 +41,7 @@ function askForAction() {
                 return;
 
             case "Add employee":
+                createEmployee();
                 return;
 
             case "View all departments":
@@ -56,25 +57,26 @@ function askForAction() {
                 return;
 
             case "Update employee role":
+                viewEmployeeRole();
                 return;
     
-            case "Update employee manager":
-                return;
+            // case "Update employee manager":
+            //     return;
 
-            case "View all employees by manager":
-                return;
+            // case "View all employees by manager":
+            //     return;
 
-            case "Remove department":
-                return;
+            // case "Remove department":
+            //     return;
 
-            case "Remove role":
-                return;
+            // case "Remove role":
+            //     return;
   
-            case "Remove employee":
-                return;
+            // case "Remove employee":
+            //     return;
 
-            case "View total used budget of a department":
-                return;
+            // case "View total used budget of a department":
+            //     return;
 
             default:
                 connection.end();
@@ -82,48 +84,7 @@ function askForAction() {
     });
 };
 
-function viewEmployees() {
-
-    db
-        .getEmployees()
-        .then((employees) => {
-            console.table(employees);
-            askForAction();
-        })
-
-}
-
-function viewEmployeesByDept() {
-    db
-        .getEmployeesByDepartment()
-        .then((results) => {
-            console.table(results);
-            askForAction();
-        })
-}
-
-function viewRoles() {
-
-    db
-        .getRoles()
-        .then((roles) => {
-            console.table(roles);
-            askForAction();
-        })
-
-}
-
-function viewDepartments() {
-
-    db
-        .getDepartments()
-        .then((departments) => {
-            console.table(departments);
-            askForAction();
-        })
-
-}
-
+// Add departments
 function createDepartment() {
     inquirer
     .prompt(
@@ -142,6 +103,7 @@ function createDepartment() {
     
 }
 
+// Add roles
 function createRole() {
 
     db
@@ -192,5 +154,63 @@ function createRole() {
         })
 
 }
+
+// Add employees
+function createEmployee() {
+
+}
+
+// View all departments
+function viewDepartments() {
+
+    db
+        .getDepartments()
+        .then((departments) => {
+            console.table(departments);
+            askForAction();
+        })
+
+}
+
+// View all roles
+function viewRoles() {
+
+    db
+        .getRoles()
+        .then((roles) => {
+            console.table(roles);
+            askForAction();
+        })
+
+}
+
+// View all employees
+function viewEmployees() {
+
+    db
+        .getEmployees()
+        .then((employees) => {
+            console.table(employees);
+            askForAction();
+        })
+
+}
+
+// Update employee roles
+function viewEmployeeRole() {
+
+    db
+        
+}
+// Update employee managers
+
+// Delete departments
+
+// Delete roles
+
+// Delete employees
+
+// View the total utilized budget of a department
+
 
 askForAction();
