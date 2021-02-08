@@ -1,6 +1,7 @@
 const db = require("./db");
-const connection = require("./db/connection")
+const connection = require("./db/connection");
 
+const mysql = require("mysql");
 const inquirer = require("inquirer");
 // const { insertRole } = require("./db");
 
