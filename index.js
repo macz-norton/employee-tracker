@@ -12,20 +12,19 @@ function askForAction() {
         name: "action",
         type: "list",
         choices: [
-            "View all employees",
-            "View all employees by department",
-            "View all employees by manager",
+            "Add department",
+            "Add role",
             "Add employee",
-            "Remove employee",
+            "View all departments",
+            "View all roles",
+            "View all employees",
             "Update employee role",
             "Update employee manager",
-            "View all departments",
-            "View total used budget of a department",
-            "Add department",
+            "View all employees by manager",
             "Remove department",
-            "View all roles",
-            "Add role",
             "Remove role",
+            "Remove employee",
+            "View total used budget of a department",
             "Quit"
         ]
     })
@@ -33,60 +32,55 @@ function askForAction() {
 
         switch(res.action) {
 
-            case "View all employees":
-                viewEmployees();
-                return;
-
-            case "View all employees by department":
-                viewEmployeesByDept();
-                return;
-
-            case "View all employees by manager":
-                return;
-
-            case "Add employee":
-                return;
-
-            case "Remove employee":
-                return;
-
-            case "Update employee role":
-                return;
-
-            case "Update employee manager":
-                return;
-            
-            case "View all departments":
-                viewDepartments();
-                return;
-
-            case "View total used budget of a department":
-                return;
-
             case "Add department":
                 createDepartment();
-                return;
-
-            case "Remove department":
-                return;
-
-            case "View all roles":
-                viewRoles();
                 return;
 
             case "Add role":
                 createRole();
                 return;
 
+            case "Add employee":
+                return;
+
+            case "View all departments":
+                viewDepartments();
+                return;
+    
+            case "View all roles":
+                viewRoles();
+                return;
+
+            case "View all employees":
+                viewEmployees();
+                return;
+
+            case "Update employee role":
+                return;
+    
+            case "Update employee manager":
+                return;
+
+            case "View all employees by manager":
+                return;
+
+            case "Remove department":
+                return;
+
             case "Remove role":
+                return;
+  
+            case "Remove employee":
+                return;
+
+            case "View total used budget of a department":
                 return;
 
             default:
                 connection.end();
         }
-    })
-
-}
+    });
+};
 
 function viewEmployees() {
 
