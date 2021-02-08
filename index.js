@@ -19,12 +19,12 @@ function askForAction() {
             "View all roles",
             "View all employees",
             "Update employee role",
-            "Update employee manager",
-            "View all employees by manager",
-            "Remove department",
-            "Remove role",
-            "Remove employee",
-            "View total used budget of a department",
+            // "Update employee manager",
+            // "View all employees by manager",
+            // "Remove department",
+            // "Remove role",
+            // "Remove employee",
+            // "View total used budget of a department",
             "Quit"
         ]
     })
@@ -34,49 +34,49 @@ function askForAction() {
 
             case "Add department":
                 createDepartment();
-                return;
+                break;
 
             case "Add role":
                 createRole();
-                return;
+                break;
 
             case "Add employee":
                 createEmployee();
-                return;
+                break;
 
             case "View all departments":
                 viewDepartments();
-                return;
+                break;
     
             case "View all roles":
                 viewRoles();
-                return;
+                break;
 
             case "View all employees":
                 viewEmployees();
-                return;
+                break;
 
             case "Update employee role":
                 viewEmployeeRole();
-                return;
+                break;
     
             // case "Update employee manager":
-            //     return;
+            //  break;
 
             // case "View all employees by manager":
-            //     return;
+            // break;
 
             // case "Remove department":
-            //     return;
+            // break;
 
             // case "Remove role":
-            //     return;
+            // break;
   
             // case "Remove employee":
-            //     return;
+            // break;
 
             // case "View total used budget of a department":
-            //     return;
+            // break;
 
             default:
                 connection.end();
@@ -87,19 +87,19 @@ function askForAction() {
 // Add departments
 function createDepartment() {
     inquirer
-    .prompt(
-        {
-            message: "What is the department name?",
-            type: "input",
-            name: "name"
-        },
-    ).then((results) => {
-        console.log(results);
+        .prompt(
+            {
+                message: "What is the department name?",
+                type: "input",
+                name: "name"
+            },
+        ).then((results) => {
+            console.log(results);
 
-        db.insertDepartment(results);
+            db.insertDepartment(results);
 
-        askForAction();
-    });
+            askForAction();
+        });
     
 }
 
@@ -109,7 +109,6 @@ function createRole() {
     db
         .getDepartments()
         .then((departments) => {
-            // TODO Fix department_id mapping
             const departmentChoices = departments.map((department) => ({
                 value: department.id,
                 name: department.name
@@ -158,6 +157,52 @@ function createRole() {
 // Add employees
 function createEmployee() {
 
+    db
+        .getRoles()
+        .then((roles) => {
+
+            const roleChoices = roles.map((role) => ({
+                value: role.id,
+                name: role.title,
+            }));
+
+            inquirer
+                .prompt([
+                    {
+                        message: "What is the employee's first name?",
+                        type: "input",
+                        name: "firstName"
+                    },
+                    {
+                        message: "What is the employee's last name?",
+                        type: "input",
+                        name: "lastName"
+                    },
+                    {
+                        message: "What is the employee's role?",
+                        type: "list",
+                        name: "role_id",
+                        choices: roleChoices 
+                    },
+                    {
+                        message: "Who is the employee's manager?",
+                        type: "list",
+                        name: "manager_id",
+                        choices: managerChoices 
+                    }
+                ]).then((results) => {
+                    const newEmployee = {
+                        title: results.title,
+                        salary: results.salary,
+                        department_ID: results.department_id
+                    }
+                    console.log(newRole);
+                    insertRole(newRole);
+                    askForAction();
+
+                });
+
+        })
 }
 
 // View all departments
