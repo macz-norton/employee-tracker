@@ -146,7 +146,7 @@ function createRole() {
                         department_ID: results.department_id
                     }
                     console.log(newRole);
-                    insertRole(newRole);
+                    db.insertRole(newRole);
                     askForAction();
 
                 });
@@ -208,7 +208,7 @@ function createEmployee() {
                     manager_id: results.manager_id
                 }
                 console.log(newEmployee);
-                insertEmployee(newEmployee);
+                db.insertEmployee(newEmployee);
                 askForAction();
     
             });
