@@ -1,12 +1,13 @@
 const db = require("./db");
 const connection = require("./db/connection");
+// const Font = require('ascii-art-font');
 
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 // const { insertRole } = require("./db");
 
 function askForAction() {
-
+    
     inquirer
     .prompt({
         message: "What would you like to do?",
@@ -58,7 +59,7 @@ function askForAction() {
                 break;
 
             case "Update employee role":
-                viewEmployeeRole();
+                updateEmployeeRole()
                 break;
     
             // case "Update employee manager":
@@ -255,9 +256,22 @@ function viewEmployees() {
 }
 
 // Update employee roles
-function viewEmployeeRole() {
+function updateEmployeeRole() {
 
-    db
+    inquirer
+        .prompt(
+            {
+                message: "What employee's role do you want to update?",
+                type: "input",
+                name: "name"
+            },
+        ).then((results) => {
+            console.log(results);
+
+            db.insertDepartment(results);
+
+            askForAction();
+        });
         
 }
 // Update employee managers

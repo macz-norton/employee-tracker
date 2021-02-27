@@ -33,6 +33,12 @@ module.exports = {
         return connection.query("SELECT * FROM employee");
     },
     // Update employee roles
+    updateEmployeeRole() {
+        return connection.query("UPDATE employee SET ? WHERE ?",
+        [
+            {role_id: },
+        ])
+    }
 
     // Update employee managers
     getEmployeesByManager() {

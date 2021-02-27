@@ -1,4 +1,3 @@
-const { SSL_OP_EPHEMERAL_RSA } = require("constants");
 const mysql = require("mysql");
 const util = require("util");
 
