@@ -168,16 +168,16 @@ function createEmployee() {
                 name: role.title,
             }));
 
-    db
-        .getEmployees()
-        .then((managers) => {
+        db
+            .getEmployees()
+            .then((managers) => {
 
-            const managerChoices = managers.map((manager) => ({
-                value: manager.id,
-                name: manager.first_name + " " + manager.last_name
-            }))
+                const managerChoices = managers.map((manager) => ({
+                    value: manager.id,
+                    name: manager.first_name + " " + manager.last_name
+                }))
 
-            inquirer
+        inquirer
             .prompt([
                 {
                     message: "What is the employee's first name?",
@@ -212,11 +212,11 @@ function createEmployee() {
                 db.insertEmployee(newEmployee);
                 askForAction();
     
-            });
+                });
             
-        })
+            })
         
-})
+        })
 }
 
 // View all departments
@@ -258,21 +258,49 @@ function viewEmployees() {
 // Update employee roles
 function updateEmployeeRole() {
 
-    inquirer
-        .prompt(
-            {
-                message: "What employee's role do you want to update?",
-                type: "input",
-                name: "name"
-            },
-        ).then((results) => {
-            console.log(results);
+    db
+        .getRoles()
+        .then((roles) => {
 
-            db.insertDepartment(results);
+            const roleChoices = roles.map((role) => ({
+                value: role.id,
+                name: role.title,
+            }));
 
-            askForAction();
+        db
+            .getEmployees()
+            .then((employees) => {
+
+                const employeeChoices = employees.map((employee) => ({
+                    value: employee.id,
+                    name: employee.first_name + " " + employee.last_name
+                }));
+
+        inquirer
+            .prompt([
+                {
+                    message: "Which employee do you want to update?",
+                    type: "list",
+                    name: "id",
+                    choices: employeeChoices
+                },
+                {
+                    message: "What is the employee's new role?",
+                    type: "list",
+                    name: "role_id",
+                    choices: roleChoices 
+                }
+            ]).then((results) => {
+
+                db.updateEmployeeRole(results);
+                console.log("Their role has been updated.")
+
+                askForAction();
+            });
+        
         });
         
+    });
 }
 // Update employee managers
 

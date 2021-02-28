@@ -33,18 +33,19 @@ module.exports = {
         return connection.query("SELECT * FROM employee");
     },
     // Update employee roles
-    updateEmployeeRole() {
+    updateEmployeeRole(results) {
         return connection.query("UPDATE employee SET ? WHERE ?",
         [
-            {role_id: },
+            {role_id: results.role_id},
+            {id: results.id}
         ])
     }
 
     // Update employee managers
-    getEmployeesByManager() {
-        return connection.query(
-            "SELECT * FROM employee INNER JOIN GROUP BY manager_id");
-    },
+    // getEmployeesByManager() {
+    //     return connection.query(
+    //         "SELECT * FROM employee INNER JOIN GROUP BY manager_id");
+    // },
 
     // Delete departments
 
