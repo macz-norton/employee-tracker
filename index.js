@@ -1,89 +1,88 @@
 const db = require("./db");
 const connection = require("./db/connection");
-// const Font = require('ascii-art-font');
+const cTable = require("console.table");
 
 const mysql = require("mysql");
 const inquirer = require("inquirer");
-// const { insertRole } = require("./db");
 
 function askForAction() {
-    
+
     inquirer
-    .prompt({
-        message: "What would you like to do?",
-        name: "action",
-        type: "list",
-        choices: [
-            "Add department",
-            "Add role",
-            "Add employee",
-            "View all departments",
-            "View all roles",
-            "View all employees",
-            "Update employee role",
-            // "Update employee manager",
-            // "View all employees by manager",
-            // "Remove department",
-            // "Remove role",
-            // "Remove employee",
-            // "View total used budget of a department",
-            "Quit"
-        ]
-    })
-    .then((res) => {
+        .prompt({
+            message: "What would you like to do?",
+            name: "action",
+            type: "list",
+            choices: [
+                "Add department",
+                "Add role",
+                "Add employee",
+                "View all departments",
+                "View all roles",
+                "View all employees",
+                "Update employee role",
+                // "Update employee manager",
+                // "View all employees by manager",
+                // "Remove department",
+                // "Remove role",
+                // "Remove employee",
+                // "View total used budget of a department",
+                "Quit"
+            ]
+        })
+        .then((res) => {
 
-        switch(res.action) {
+            switch(res.action) {
 
-            case "Add department":
-                createDepartment();
-                break;
+                case "Add department":
+                    createDepartment();
+                    break;
 
-            case "Add role":
-                createRole();
-                break;
+                case "Add role":
+                    createRole();
+                    break;
 
-            case "Add employee":
-                createEmployee();
-                break;
+                case "Add employee":
+                    createEmployee();
+                    break;
 
-            case "View all departments":
-                viewDepartments();
-                break;
+                case "View all departments":
+                    viewDepartments();
+                    break;
+        
+                case "View all roles":
+                    viewRoles();
+                    break;
+
+                case "View all employees":
+                    viewEmployees();
+                    break;
+
+                case "Update employee role":
+                    updateEmployeeRole()
+                    break;
+        
+                // case "Update employee manager":
+                //  break;
+
+                // case "View all employees by manager":
+                // break;
+
+                // case "Remove department":
+                // break;
+
+                // case "Remove role":
+                // break;
     
-            case "View all roles":
-                viewRoles();
-                break;
+                // case "Remove employee":
+                // break;
 
-            case "View all employees":
-                viewEmployees();
-                break;
+                // case "View total used budget of a department":
+                // break;
 
-            case "Update employee role":
-                updateEmployeeRole()
-                break;
-    
-            // case "Update employee manager":
-            //  break;
-
-            // case "View all employees by manager":
-            // break;
-
-            // case "Remove department":
-            // break;
-
-            // case "Remove role":
-            // break;
-  
-            // case "Remove employee":
-            // break;
-
-            // case "View total used budget of a department":
-            // break;
-
-            default:
-                connection.end();
-        }
-    });
+                default:
+                    connection.end();
+            }
+        });
 };
 
 // Add departments
@@ -96,10 +95,8 @@ function createDepartment() {
                 name: "name"
             },
         ).then((results) => {
-            console.log(results);
-
             db.insertDepartment(results);
-
+            console.log("The department has been added.");
             askForAction();
         });
     
@@ -113,7 +110,7 @@ function createRole() {
         .then((departments) => {
             const departmentChoices = departments.map((department) => ({
                 value: department.id,
-                name: department.name
+                name: department.department
             }))
 
             inquirer
@@ -146,8 +143,8 @@ function createRole() {
                         salary: results.salary,
                         department_ID: results.department_id
                     }
-                    console.log(newRole);
                     db.insertRole(newRole);
+                    console.log("The role has been added.");
                     askForAction();
 
                 });
@@ -208,8 +205,8 @@ function createEmployee() {
                     role_id: results.role_id,
                     manager_id: results.manager_id
                 }
-                console.log(newEmployee);
                 db.insertEmployee(newEmployee);
+                console.log("The new employee has been added.");
                 askForAction();
     
                 });
@@ -294,7 +291,6 @@ function updateEmployeeRole() {
 
                 db.updateEmployeeRole(results);
                 console.log("Their role has been updated.")
-
                 askForAction();
             });
         
