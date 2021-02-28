@@ -1,4 +1,5 @@
 const connection = require("./connection");
+const SQL = require("sql-template-strings");
 
 module.exports = {
 
@@ -22,15 +23,23 @@ module.exports = {
     },
     // View all departments
     getDepartments() {
-        return connection.query("SELECT id, name as department FROM department");
+        return connection.query("SELECT id, name AS department FROM department");
     },
     // View all roles
     getRoles() {
-        return connection.query("SELECT role.id, role.title, role.salary, department.name as department FROM role JOIN department ON role.department_id=department.id");
+        return connection.query(SQL
+            `SELECT role.id, role.title, role.salary, department.name AS department
+            FROM role
+            LEFT JOIN department ON role.department_id=department.id`);
     },
     // View all employees
     getEmployees() {
-        return connection.query("SELECT * FROM employee");
+        return connection.query(SQL
+            `SELECT employee.id, employee.first_name, employee.last_name, role.title, role.salary, department.name AS department, CONCAT(manager.first_name, ' ', manager.last_name) as manager
+            FROM employee
+            LEFT JOIN role ON employee.role_id=role.id
+            LEFT JOIN department ON role.department_id=department.id
+            LEFT JOIN employee manager ON employee.manager_id=manager.id;`);
     },
     // Update employee roles
     updateEmployeeRole(results) {
