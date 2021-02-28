@@ -22,11 +22,11 @@ module.exports = {
     },
     // View all departments
     getDepartments() {
-        return connection.query("SELECT * FROM department");
+        return connection.query("SELECT id, name as department FROM department");
     },
     // View all roles
     getRoles() {
-        return connection.query("SELECT * FROM role");
+        return connection.query("SELECT role.title, role.salary, department.name as department FROM role JOIN department ON role.department_id=department.id");
     },
     // View all employees
     getEmployees() {
