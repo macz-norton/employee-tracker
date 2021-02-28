@@ -32,7 +32,7 @@ To run the command-line application following installation, run `node index` in 
 
 You will be prompted with questions about what you would like to do with the Employee Directory (view, add, update) and your answers will be used to interact with the database:
 * Video that demonstrates the application's functionality: [watch video](https://user-images.githubusercontent.com/71162422/109406307-ca085e00-792c-11eb-9422-b76207cec107.mp4)
-* Inquirer prompt questions in the user's terminal: ![Terminal screenshot](https://user-images.githubusercontent.com/71162422/109406300-bf4dc900-792c-11eb-889b-97b566a7fd0d.png)
+* Inquirer prompt questions in the user's terminal: ![Terminal screenshot](https://user-images.githubusercontent.com/71162422/109406396-7d715280-792d-11eb-81aa-235287d2018e.png)
 
 ## Tests
 
