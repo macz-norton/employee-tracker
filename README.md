@@ -31,7 +31,7 @@ So that I can organize and plan my business
 To run the command-line application following installation, run `node index` in your terminal.
 
 You will be prompted with questions about what you would like to do with the Employee Directory (view, add, update) and your answers will be used to interact with the database:
-* Video that demonstrates the application's functionality: [watch video](https://user-images.githubusercontent.com/71162422/109406307-ca085e00-792c-11eb-9422-b76207cec107.mp4)
+* Video that demonstrates the application's functionality: [watch video](https://user-images.githubusercontent.com/71162422/109406410-a42f8900-792d-11eb-8d67-63a076ee418a.mp4)
 * Inquirer prompt questions in the user's terminal: ![Terminal screenshot](https://user-images.githubusercontent.com/71162422/109406396-7d715280-792d-11eb-81aa-235287d2018e.png)
 
 ## Tests
